@@ -23,7 +23,7 @@ On small screen.
 
   [<img src="images/userinput_buttons.png">]()
 - There is a input spam delay of 1 sec.
-- After the round is finished, the game will over.
+- After the rounds are finished, the game will over.
 - To replay simply tap on the replay button.
 
 Thanks.

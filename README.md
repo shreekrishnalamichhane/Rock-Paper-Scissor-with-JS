@@ -1,5 +1,6 @@
 ## Scissor Paper Rock Game with JS.
 
+Demo play link: https://shreekrishnalamichhane.github.io/Rock-Paper-Scissor-with-JS/
 ### Snapshots 
 - ## Choosing number of rounds.
 

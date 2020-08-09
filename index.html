@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scissor Paper Rock</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/fontawesome-5.7.0.min.css">
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="d-none" id="GameOver-div">
+        <div class="modal d-flex flex-column justify-content-center align-items-center" id="centralModalLGInfoDemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;" aria-modal="true">
+            <div class="modal-dialog  modal-notify" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <h1>Game Over!</h1>
+
+                            <h5>Your Score: <span id="HumanScoreModal"></span></h5>
+                            <h5>Computer's Score: <span id="ComputerScoreModal"></span></h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                    <a type="button" class="btn btn-outline-info waves-effect" onclick="location.reload()" data-dismiss="modal">Replay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-white" style="height: 100vh;">
+        <div class="row">
+            <div class="col-12 bg-primary py-3">
+                <h2 class="text-center text-white">Scissor Paper Rock</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                <div class="d-none d-lg-block space-60"></div>
+                <div class="d-lg-none space-15"></div>
+                <div class="card">
+                    <div class="d-none" id="RoundCard-div">
+                        <div class="card-header d-flex justify-content-center bg-dark">
+                            <!-- <h4 class="text-center text-white">PlayGround</h4> -->
+                            <h4 class="text-center text-white"><b>Round: </b> <span id="CurrentRound">... </span> / <span id="TotalRounds">...</span></h4>
+                        </div>
+                    </div>
+                    <div class="card-body white-skin">
+                        <div class="row" id="ChooseRounds-div">
+                            <div class="col-12 ">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="h5 text-center mb-4">How many number of rounds??</p>
+                                    </div>
+                                    <div class="col-lg-12 ">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center px-0">
+                                                <button type="button" class="btn btn-secondary btn-rounded waves-effect waves-light" id="RoundBtn5" rn="5" style="width: 100%; font-size: large; font-weight: 800;">5</button>
+                                                <button type="button" class="btn btn-secondary btn-rounded waves-effect waves-light" id="RoundBtn10" rn="10" style="width: 100%; font-size: large; font-weight: 800;">10</button>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center px-0">
+                                                <button type="button" class="btn btn-secondary btn-rounded waves-effect waves-light" id="RoundBtn15" rn="15" style="width: 100%; font-size: large; font-weight: 800;">15</button>
+                                                <button type="button" class="btn btn-secondary btn-rounded waves-effect waves-light" id="RoundBtn20" rn="20" style="width: 100%; font-size: large; font-weight: 800;">20</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-none" id="Game-div">
+                            <div class="col-12"><h3 class="text-center text-danger"><i class="fas fa-user-circle text-danger"></i> Computer</h3></div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <a class="btn-floating  waves-effect waves-light disabled" id="ComputerScissorBtn"><i class="fas fa-hand-scissors"></i></a>
+                                <a class="btn-floating  waves-effect waves-light disabled" id="ComputerPaperBtn"><i class="fas fa-hand-paper"></i></a>
+                                <a class="btn-floating  waves-effect waves-light disabled" id="ComputerRockBtn"><i class="fas fa-hand-rock"></i></a>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="card my-4">
+                                    <div class="card-body" id="Result-div">   <!-- bg-success for win and bg-danger for loose -->
+                                        <div class="row text-center">
+                                            <div class="col-12"><h5 class="text-white" id="ComputerChoiceText"></h5></div>
+                                            <div class="col-12">
+                                                <h3 class="text-white" id="ResultText">Start</h3>
+                                            </div>
+                                            <div class="col-12"><h5 class="text-white" id="HumanChoiceText"></h5></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <a class="btn-floating  waves-effect waves-light user-input" data="0"  id="HumanScissorBtn"><i class="fas fa-hand-scissors"></i></a>
+                                <a class="btn-floating  waves-effect waves-light user-input" data="1" id="HumanPaperBtn"><i class="fas fa-hand-paper"></i></i></a>
+                                <a class="btn-floating  waves-effect waves-light user-input" data="2" id="HumanRockBtn"><i class="fas fa-hand-rock"></i></a>
+                            </div>
+                            <div class="col-12"><h3 class="text-center text-success"><i class="fas fa-user-circle text-success"></i> You</h3></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="d-none d-lg-block space-60"></div>
+                <div class="d-lg-none space-15"></div>
+                <div class="card" id="ScoreCard-div">
+                    <table class="table">
+                        <!-- Table head -->
+                        <thead class="blue-grey lighten-4 text-center">
+                            <tr>
+                                <th>#</th>
+                                <th>Player</th>
+                                <th>Game Won</th>
+                            </tr>
+                        </thead>
+                        <!-- Table head -->
+          
+                        <!-- Table body -->
+                        <tbody class="text-center">
+                            <tr>
+                                <th ><h4><i class="fas fa-user-circle text-danger"></i></h4></th>
+                                <td>Computer</td>
+                                <td id="ComputerScore">0</td>
+                            </tr>
+                            <tr>
+                                <th><h4><i class="fas fa-user-circle text-success"></i></h4></th>
+                                <td>Human</td>
+                                <td id="HumanScore">0</td>
+                            </tr>
+                            <tr>
+                                <th><h4><i class="fas fa-user-circle text-dark"></i></h4></th>
+                                <td>Draw</td>
+                                <td id="DrawScore">0</td>
+                            </tr>
+                        </tbody>
+                        <!-- Table body -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="js/mdb.min.js"></script>
+<script src="js/addons/datatables.min.js"></script>
+<script src="js/scissor-paper-rock.js"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</html>
